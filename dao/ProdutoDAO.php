@@ -57,7 +57,7 @@ class ProdutoDAO {
     function listar() {
         
     }
-
+    
     function pegarPorId($id) {
         require $_SERVER['DOCUMENT_ROOT'] . "/sysconst/bd/Conexao.php";
         try {

@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <?php
+session_start();
+if (!isset($_SESSION['idUsuarioLogado']) && !isset($_COOKIE['idUsuarioLogado'])){
+     header('Location: http://'.$_SERVER['HTTP_HOST'].'/sysconst/login.php');
+}
 require_once $_SERVER['DOCUMENT_ROOT'] . "/sysconst/vo/Usuario.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/sysconst/dao/UsuarioDAO.php";
 $usuario = new Usuario();

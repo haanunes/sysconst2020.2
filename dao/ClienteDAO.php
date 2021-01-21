@@ -1,19 +1,22 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . "/sysconst/vo/Usuario.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/sysconst/vo/Cliente.php";
 
-class UsuarioDAO {
-
+class ClienteDAO {
     function salvar($obj) {
         require $_SERVER['DOCUMENT_ROOT'] . "/sysconst/bd/Conexao.php";
         try {
-            $sql = "insert into usuario (nome,login,email,senha)
-                    values (:nome,:login,:email,:senha)";
+            $sql = "insert into cliente (nome,rua,numero,bairro,cidade,uf,cep,celular)
+                    values (:nome,:rua,:numero,:bairro,:cidade,:uf,:cep,:celular)";
             $p_sql = $dbh->prepare($sql);
             $p_sql->bindValue(":nome", $obj->getNome());
-            $p_sql->bindValue(":login", $obj->getLogin());
-            $p_sql->bindValue(":email", $obj->getEmail());
-            $p_sql->bindValue(":senha", $obj->getSenha());
+            $p_sql->bindValue(":rua", $obj->getRua());
+            $p_sql->bindValue(":numero", $obj->getNumero());
+            $p_sql->bindValue(":bairro", $obj->getBairro());
+            $p_sql->bindValue(":cidade", $obj->getCidade());
+            $p_sql->bindValue(":uf", $obj->getUf());
+            $p_sql->bindValue(":cep", $obj->getCep());
+            $p_sql->bindValue(":celular", $obj->getCelular());
             $p_sql->execute();
             return $dbh->lastInsertId();
         } catch (Exception $ex) {
@@ -22,39 +25,20 @@ class UsuarioDAO {
         }
     }
 
-    function logar($login, $senha) {
-        require $_SERVER['DOCUMENT_ROOT'] . "/sysconst/bd/Conexao.php";
-        try {
-            $sql = "SELECT * FROM `usuario` WHERE `login`= :login and `senha`=:senha ";
-            $p_sql = $dbh->prepare($sql);
-             $p_sql->bindValue(":login", $login);
-             $p_sql->bindValue(":senha", $senha);
-            $p_sql->execute();
-            $dados = $p_sql->fetchAll(PDO::FETCH_OBJ);
-            $lista = array();
-            foreach ($dados as $p) {
-                $lista[] = self::popular($p);
-            }
-            if (sizeof($lista)>0)
-                return $lista[0];
-            else{
-                return null;
-            }
-        } catch (Exception $ex) {
-            echo "Erro: Não foi possível inserir. " .
-            $ex->getMessage();
-        }
-    }
 
     function atualizar($obj) {
         require $_SERVER['DOCUMENT_ROOT'] . "/sysconst/bd/Conexao.php";
         try {
-            $sql = "UPDATE usuario SET nome=:nome,login=:login,senha=:senha,email=:email WHERE id = :id";
+            $sql = "UPDATE cliente SET nome=:nome,rua=:rua,bairro=:bairro,numero=:numero, cidade=:cidade,uf=:uf,cep=:cep, celular=:celular WHERE id = :id";
             $p_sql = $dbh->prepare($sql);
             $p_sql->bindValue(":nome", $obj->getNome());
-            $p_sql->bindValue(":login", $obj->getLogin());
-            $p_sql->bindValue(":email", $obj->getEmail());
-            $p_sql->bindValue(":senha", $obj->getSenha());
+            $p_sql->bindValue(":rua", $obj->getRua());
+            $p_sql->bindValue(":numero", $obj->getNumero());
+            $p_sql->bindValue(":bairro", $obj->getBairro());
+            $p_sql->bindValue(":cidade", $obj->getCidade());
+            $p_sql->bindValue(":uf", $obj->getUf());
+            $p_sql->bindValue(":cep", $obj->getCep());
+            $p_sql->bindValue(":celular", $obj->getcelular());
             $p_sql->bindValue(":id", $obj->getId());
             $p_sql->execute();
         } catch (Exception $ex) {
@@ -66,7 +50,7 @@ class UsuarioDAO {
     function remover($id) {
         require $_SERVER['DOCUMENT_ROOT'] . "/sysconst/bd/Conexao.php";
         try {
-            $sql = "DELETE FROM `usuario` WHERE id = :idRemovido";
+            $sql = "DELETE FROM `cliente` WHERE id = :idRemovido";
             $p_sql = $dbh->prepare($sql);
             $p_sql->bindValue(":idRemovido", $id);
             $p_sql->execute();
@@ -83,7 +67,7 @@ class UsuarioDAO {
     function pegarPorId($id) {
         require $_SERVER['DOCUMENT_ROOT'] . "/sysconst/bd/Conexao.php";
         try {
-            $sql = "SELECT * FROM `usuario` where id = :idBuscar";
+            $sql = "SELECT * FROM `cliente` where id = :idBuscar";
             $p_sql = $dbh->prepare($sql);
             $p_sql->bindValue(":idBuscar", $id);
             $p_sql->execute();
@@ -95,7 +79,7 @@ class UsuarioDAO {
             if (sizeof($lista)>0)
                 return $lista[0];
             else{
-                return new Usuario();
+                return new Cliente();
             }
         } catch (Exception $ex) {
             echo "Erro: Não foi possível inserir. " .
@@ -106,7 +90,7 @@ class UsuarioDAO {
     function listarTodos() {
         require $_SERVER['DOCUMENT_ROOT'] . "/sysconst/bd/Conexao.php";
         try {
-            $sql = "SELECT * FROM `usuario` order by nome ASC";
+            $sql = "SELECT * FROM `cliente` order by nome ASC";
             $p_sql = $dbh->prepare($sql);
             $p_sql->execute();
             $dados = $p_sql->fetchAll(PDO::FETCH_OBJ);
@@ -122,12 +106,16 @@ class UsuarioDAO {
     }
 
     private static function popular($dados) {
-        $obj = new Usuario();
+        $obj = new Cliente();
         $obj->setId($dados->id);
         $obj->setNome($dados->nome);
-        $obj->setLogin($dados->login);
-        $obj->setEmail($dados->email);
-        $obj->setSenha($dados->senha);
+        $obj->setRua($dados->rua);
+        $obj->setNumero($dados->numero);
+        $obj->setBairro($dados->bairro);
+        $obj->setCidade($dados->cidade);
+        $obj->setUf($dados->uf);
+        $obj->setCep($dados->cep);
+        $obj->setCelular($dados->celular);
         return $obj;
     }
 
