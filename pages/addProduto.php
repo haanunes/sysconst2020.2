@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Syscont - Adicionar Cliente</title>
+        <title>Syscont - Adicionar Produto</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -120,7 +120,7 @@
                     </li>
                 </ul>
                 <!-- /.navbar-top-links -->
- <?php include $_SERVER['DOCUMENT_ROOT'] . "/sysconst/pages/menuLateral.php"?>
+                <?php include $_SERVER['DOCUMENT_ROOT'] . "/sysconst/pages/menuLateral.php" ?>
                 <!-- /.navbar-static-side -->
             </nav>
 
@@ -128,7 +128,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header">Adicionar Cliente</h1>
+                            <h1 class="page-header">Adicionar Produto</h1>
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
@@ -141,62 +141,38 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
-                                        <form role="form" action="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/sysconst/controle/controleCliente.php'?>" method="post" > <!-- falta informar o destino do formulario e o método-->
+                                        <form role="form" action="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/sysconst/controle/controleProduto.php' ?>" method="post" > <!-- falta informar o destino do formulario e o método-->
+                                            <input type="hidden" name="id" value="0"/>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label for="nome">Nome:</label>
-                                                    <input class="form-control" placeholder="Digite o nome..." id="nome" name="nome">
+                                                    <label for="codigo">Código:</label>
+                                                    <input class="form-control" placeholder="Digite o código de barras..." id="codigo" name="codigo">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label for="rua">Rua:</label>
-                                                    <input class="form-control" placeholder="Digite a rua..." id="rua" name="rua">
+                                                    <label for="descricao">Descrição:</label>
+                                                    <input class="form-control" placeholder="Digite a descrição..." id="descricao" name="descricao">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label for="numero">Número:</label>
-                                                    <input class="form-control" placeholder="Digite o número..." id="numero" name="numero">
+                                                    <label for="precoCompra">Preço de Compra:</label>
+                                                    <input class="form-control" placeholder="Digite o preço de compra..." id="precoCompra" name="precoCompra">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label for="bairro">Bairro:</label>
-                                                    <input class="form-control" placeholder="Digite o bairro..." id="bairro" name="bairro">
+                                                    <label for="precoVenda">Preço de Venda:</label>
+                                                    <input class="form-control" placeholder="Digite o preço de venda..." id="precoVenda" name="precoVenda">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label for="cidade">Cidade:</label>
-                                                    <input class="form-control" placeholder="Digite a cidade..." id="cidade" name="cidade">
+                                                    <label for="quantidade">Quantidade em estoque:</label>
+                                                    <input class="form-control" placeholder="Digite a quantidade..." id="quantidade" name="quantidade">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="uf">UF:</label>
-                                                    <select class="form-control" id="uf" name="uf">
-                                                        <option>AC</option>
-                                                        <option>PA</option>
-                                                        <option>PB</option>
-                                                        <option>PE</option>
-                                                        <option>PI</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="cep">CEP:</label>
-                                                    <input class="form-control" placeholder="Digite o CEP..." id="cep" name="cep">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="celular">Celular:</label>
-                                                    <input class="form-control" placeholder="Digite o celular..." id="celular" name="celular">
-                                                </div>
-                                            </div>
-
 
                                             <div class="col-lg-12">
                                                 <button type="submit" class="btn btn-success">Salvar</button>

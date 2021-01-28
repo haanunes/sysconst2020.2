@@ -7,13 +7,19 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Syscont - Adicionar Cliente</title>
+        <title>Syscont - Listar Produto</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="../css/bootstrap.min.css" rel="stylesheet">
 
         <!-- MetisMenu CSS -->
         <link href="../css/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../css/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../css/dataTables/dataTables.responsive.css" rel="stylesheet">
 
         <!-- Custom CSS -->
         <link href="../css/startmin.css" rel="stylesheet">
@@ -35,7 +41,7 @@
             <!-- Navigation -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">Startmin</a>
+                    <a class="navbar-brand" href="index.php">Startmin</a>
                 </div>
 
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -128,111 +134,95 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header">Adicionar Cliente</h1>
+                            <h1 class="page-header">Produtos</h1>
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
+                    
+                   
                     <!-- /.row -->
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Preencha o formulário
+                                    Listagem de Produtos
                                 </div>
+                                <!-- /.panel-heading -->
                                 <div class="panel-body">
-                                    <div class="row">
-                                        <form role="form" action="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/sysconst/controle/controleCliente.php'?>" method="post" > <!-- falta informar o destino do formulario e o método-->
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="nome">Nome:</label>
-                                                    <input class="form-control" placeholder="Digite o nome..." id="nome" name="nome">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="rua">Rua:</label>
-                                                    <input class="form-control" placeholder="Digite a rua..." id="rua" name="rua">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="numero">Número:</label>
-                                                    <input class="form-control" placeholder="Digite o número..." id="numero" name="numero">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="bairro">Bairro:</label>
-                                                    <input class="form-control" placeholder="Digite o bairro..." id="bairro" name="bairro">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="cidade">Cidade:</label>
-                                                    <input class="form-control" placeholder="Digite a cidade..." id="cidade" name="cidade">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="uf">UF:</label>
-                                                    <select class="form-control" id="uf" name="uf">
-                                                        <option>AC</option>
-                                                        <option>PA</option>
-                                                        <option>PB</option>
-                                                        <option>PE</option>
-                                                        <option>PI</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="cep">CEP:</label>
-                                                    <input class="form-control" placeholder="Digite o CEP..." id="cep" name="cep">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="celular">Celular:</label>
-                                                    <input class="form-control" placeholder="Digite o celular..." id="celular" name="celular">
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-lg-12">
-                                                <button type="submit" class="btn btn-success">Salvar</button>
-                                                <button type="reset" class="btn btn-warning">Limpar</button>
-                                            </div>
-                                        </form>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover" id="dataTables-example">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Descrição</th>
+                                                    <th>Preço de Compra</th>
+                                                    <th>Preço de Venda</th>
+                                                    <th>Quantidade em Estoque</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . "/sysconst/dao/ProdutoDAO.php";
+$dao = new ProdutoDAO();
+$lista = $dao->listarTodos();
+foreach ($lista as $produto){
+   echo "<tr class='odd '>";
+   echo "<td>".$produto->getCodigo()."</td>";
+   echo "<td>".$produto->getDescricao()."</td>";
+   echo "<td>".$produto->getPrecoCompra()."</td>";
+   echo "<td>".$produto->getPrecoVenda()."</td>";
+   echo "<td>".$produto->getQuantidade()."</td>";
+   echo "</tr>";
+   
+}
+?>
+                                               
+                                            </tbody>
+                                        </table>
                                     </div>
+                                    <!-- /.table-responsive -->
                                 </div>
-                                <!-- /.row (nested) -->
+                                <!-- /.panel-body -->
                             </div>
-                            <!-- /.panel-body -->
+                            <!-- /.panel -->
                         </div>
-                        <!-- /.panel -->
+                        <!-- /.col-lg-12 -->
                     </div>
-                    <!-- /.col-lg-12 -->
+                    <!-- /.row -->
+                   
+                   
                 </div>
-                <!-- /.row -->
+                <!-- /.container-fluid -->
             </div>
-            <!-- /.container-fluid -->
+            <!-- /#page-wrapper -->
+
         </div>
-        <!-- /#page-wrapper -->
+        <!-- /#wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
+        <!-- jQuery -->
+        <script src="../js/jquery.min.js"></script>
 
-    <!-- jQuery -->
-    <script src="../js/jquery.min.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../js/bootstrap.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../js/bootstrap.min.js"></script>
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../js/metisMenu.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="../js/metisMenu.min.js"></script>
+        <!-- DataTables JavaScript -->
+        <script src="../js/dataTables/jquery.dataTables.min.js"></script>
+        <script src="../js/dataTables/dataTables.bootstrap.min.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="../js/startmin.js"></script>
+        <!-- Custom Theme JavaScript -->
+        <script src="../js/startmin.js"></script>
 
-</body>
+        <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+        <script>
+            $(document).ready(function() {
+                $('#dataTables-example').DataTable({
+                        responsive: true
+                });
+            });
+        </script>
+
+    </body>
 </html>

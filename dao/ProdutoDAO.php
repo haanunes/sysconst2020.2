@@ -8,7 +8,7 @@ class ProdutoDAO {
         require $_SERVER['DOCUMENT_ROOT'] . "/sysconst/bd/Conexao.php";
         try {
             $sql = "insert into produto (descricao,codigo,precoCompra,precoVenda,quantidade)
-                    values (:descricao,:codigo,:precoCompra,:precoVenda)";
+                    values (:descricao,:codigo,:precoCompra,:precoVenda,:quantidade)";
             $p_sql = $dbh->prepare($sql);
             $p_sql->bindValue(":descricao", $obj->getDescricao());
             $p_sql->bindValue(":codigo", $obj->getCodigo());
@@ -57,7 +57,7 @@ class ProdutoDAO {
     function listar() {
         
     }
-    
+
     function pegarPorId($id) {
         require $_SERVER['DOCUMENT_ROOT'] . "/sysconst/bd/Conexao.php";
         try {
@@ -70,9 +70,9 @@ class ProdutoDAO {
             foreach ($dados as $p) {
                 $lista[] = self::popular($p);
             }
-            if (sizeof($lista)>0)
+            if (sizeof($lista) > 0)
                 return $lista[0];
-            else{
+            else {
                 return new Produto();
             }
         } catch (Exception $ex) {

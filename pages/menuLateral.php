@@ -23,7 +23,7 @@
                                         <a href="addCliente.php">Adicionar Cliente</a>
                                     </li>
                                     <li>
-                                        <a href="morris.html">Listar Clientes</a>
+                                        <a href="listarCliente.php">Listar Clientes</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
@@ -32,10 +32,10 @@
                                 <a href="#"><i class="fa fa-shopping-cart fa-fw"></i> Produto<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="flot.html">Adicionar Produto</a>
+                                        <a href="addProduto.php">Adicionar Produto</a>
                                     </li>
                                     <li>
-                                        <a href="morris.html">Listar Produto</a>
+                                        <a href="listarProduto.php">Listar Produto</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->

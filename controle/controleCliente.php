@@ -16,6 +16,6 @@ if($_POST['id']==0)
     $dao->salvar($cliente);
 else
     $dao->atualizar($cliente);
-header('Location: http://'.$_SERVER['HTTP_HOST'].'/sysconst/listarCliente.php');
+header('Location: http://'.$_SERVER['HTTP_HOST'].'/sysconst/pages/listarCliente.php');
 
 ?>
